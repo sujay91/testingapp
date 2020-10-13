@@ -10,7 +10,11 @@ constructor(props){
 
   state={
     val:'',
-    res:''
+    res:'',
+    valdrp:'',
+    drpvals:{
+      name:'hello',value:'xet'
+    }
   }
  
 onClickHandler=()=>{
@@ -36,7 +40,36 @@ Updateval=(e)=>{
   this.setState({res:''});
 }
 
+Updatevaldrp=(e)=>{
+  this.setState({valdrp:e.target.value});
+ 
+}
+
+onClickHandlerdrp =()=>{
+  var newdrp={};
+  
+  console.log(this.state.drpvals);
+  let obj={name:'hello',value:this.state.valdrp};
+  newdrp={
+    ...this.state.drpvals,
+   val: obj
+  };
+  console.log(newdrp);
+  this.setState({drpvals:newdrp});
+  console.log(this.state.drpvals);
+}
+
   render(){
+    let drp_val='';
+   // if(this.state.drpval!=[] && this.state.drpval!=null)
+   // {
+//console.log(this.state.drpval);
+
+ 
+
+
+   
+
     return (
       <div className="App">
        <label className="Sujay">Please enter your name here:</label>
@@ -47,6 +80,22 @@ Updateval=(e)=>{
        {
          (this.state.res!=='')?<div>{(this.state.res=='true')?<div>Yes</div>:<div>no</div>}</div>:null
        }
+
+      <br/>
+      <br/>
+      <label>Please enter the value to add to dropdown:</label>
+      <input type="text" value={this.state.valdrp} onChange={this.Updatevaldrp}></input>
+      <br/>
+      <button className="Bhola" onClick={this.onClickHandlerdrp} > Add to dropdown</button>
+      <select>
+        
+        {this.state.drpvals.map((obj)=>{
+  return(
+    <option  value={obj.val}>{obj.val}</option>
+  )
+})
+}
+      </select>
        
       </div>
     );
